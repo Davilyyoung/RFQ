@@ -1,0 +1,26 @@
+# 忽略 node_modules 目录
+node_modules/
+
+# 也可以忽略子目录中的 node_modules
+**/node_modules/
+
+# 其他常见要忽略的 Node.js 相关文件
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 环境变量文件
+.env
+.env.local
+.env.production
+
+# 构建输出目录
+/dist
+/build
+
+# IDE 配置文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
