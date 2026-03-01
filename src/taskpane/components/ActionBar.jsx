@@ -1,23 +1,49 @@
 import * as React from "react";
-export default function ActionBar({ onExtract, itemCount }) {
+export default function ActionBar({ phase, onExtract, onSubmit }) {
+
+    let text = "Extract RFQ";
+    let handler = onExtract;
+    let disabled = false;
+
+    if (phase === "extracting") {
+        text = "Analyzing...";
+        disabled = true;
+    }
+
+    if (phase === "extracted") {
+        text = "Review & Submit";
+        handler = onSubmit;
+    }
+
+    if (phase === "submitting") {
+        text = "Creating RFQ...";
+        disabled = true;
+    }
+
+    if (phase === "completed") {
+        text = "Completed";
+        disabled = true;
+    }
+
+    if (phase === "loading") {
+        disabled = true;
+    }
+
     return (
-        <div>
-            <button
-                onClick={onExtract}
-                style={{
-                    background: "#1976d2",
-                    color: "#fff",
-                    border: "none",
-                    padding: "10px 16px",
-                    borderRadius: 8,
-                    cursor: "pointer",
-                    width: "100%"
-                }}
-            >
-                {itemCount > 0
-                    ? "Review & Submit"
-                    : "Extract RFQ"}
-            </button>
-        </div>
+        <button
+            onClick={handler}
+            disabled={disabled}
+            style={{
+                width: "100%",
+                padding: 12,
+                borderRadius: 8,
+                border: "none",
+                background: disabled ? "#999" : "#1976d2",
+                color: "#fff",
+                cursor: disabled ? "not-allowed" : "pointer"
+            }}
+        >
+            {text}
+        </button>
     );
 }
